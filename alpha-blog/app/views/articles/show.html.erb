@@ -1,0 +1,8 @@
+<h1>Showing article details</h1>
+
+<p><strong>Title : </strong> <%= @article.title %> </p>
+<p><strong>Description : </strong><%= @article.description %></p></br>
+<td><%= link_to 'Index', articles_path %></td> |
+<td><%= link_to 'Edit', edit_article_path(@article) %></td>
+<%= link_to 'destroy', article_path(@article), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+

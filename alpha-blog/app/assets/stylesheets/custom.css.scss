@@ -1,0 +1,61 @@
+/* global */
+$theme-colors: (
+  dark: #25283D,
+  dark2: #0091AD,
+  light1: #C8F6FF,
+  success: #5cb85c, 
+  failure: #ED8282
+
+);
+
+/* navbar */
+#logo {
+    float: left;
+    font-size: 1.7em;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    font-weight: bold;
+  }
+  
+.navbar {
+    background-color:map-get($theme-colors, dark) !important;
+}
+
+.nav-link {
+    color: map-get($theme-colors, light1) !important;
+}
+
+.navbar-brand {
+    color: map-get($theme-colors, dark2) !important;
+
+}
+/** navbar logo */
+#logo {
+    float: left;
+    font-size: 1.7em;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    font-weight: bold;
+  }
+
+/** navbar search button */ 
+.btn-outline-success {
+    float: right;
+    margin-top: 8px;
+    margin-right: 16px;
+    color: map-get($theme-colors, light1) !important;
+    border-color: map-get($theme-colors, light1) !important;
+}
+
+.custom-btn-outline-success:hover {
+    color: map-get($theme-colors, dark2) !important;
+}
+
+
+/* jumbotron index */ 
+.jumbotron {
+    background-color: map-get($theme-colors, secondary) !important;
+    color: white !important;
+}

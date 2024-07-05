@@ -1,0 +1,50 @@
+/* Override des configurations de Bootstrap */
+$primary-color: #333;
+
+.class_to_override {
+    background-color: $primary-color !important;
+}
+
+
+/* Définition et utilisation de variables */
+$primary-color: #333;
+$secondary-color: #777;
+$success-color: #5cb85c;
+
+.navbar {
+    background-color: $primary-color ;
+}
+
+
+/* Mapping : "dictionnaire" de variables CSS */
+$theme-colors: (
+    primary: #333,
+    secondary: #777,
+    success: #5cb85c
+);
+
+body {
+    color: map-get($theme-colors, primary);
+}
+
+
+/* mixins : blocs de code réutilisables */
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    @include flex-center;
+}
+
+/* functions 
+
+@function calculate-rem($size) {
+    @return $size / 16 * 1rem;
+}
+
+.container_to_apply_function {
+    font-size: calculate-rem(18px);
+}*/
