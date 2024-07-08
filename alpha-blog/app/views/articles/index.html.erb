@@ -9,6 +9,9 @@
       <th>Created at</th>
       <th>Updated at</th>
       <th colspan="3">Actions</th>
+      <th>Writer</th>
+      <th>Writer id</th>
+
     </tr>
   </thead>
   <tbody>
@@ -17,12 +20,14 @@
       <td><%= article.title%></td>
       <td><%= article.description%></td>
       <td><%= article.views%></td>
-      <td><%= article.created_at%></td>
-      <td><%= article.updated_at%></td>
+      <td><%= article.created_at.strftime("%d/%m/%Y")%></td>
+      <td><%= article.updated_at.strftime("%d/%m/%Y")%></td>
     <td><%= link_to 'Show', article_path(article) %></td>
     <td><%= link_to 'Edit', edit_article_path(article) %>
     <td><%= link_to 'destroy', article_path(article), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
-      
+    <td><%= article.user.username if article.user %></td>
+    <td><%= article.user.id if article.user %></td>
+
     </tr>
     <% end %>
   </tbody>

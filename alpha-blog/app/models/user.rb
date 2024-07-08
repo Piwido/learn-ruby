@@ -1,9 +1,13 @@
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+    before_save { self.email = email.downcase }
     has_many :articles
     validates :username, uniqueness: {case_sensitive: false},   
                         presence: true, length: { minimum: 3, maximum: 25}
-    VALID_EMAIL_REGEX =  /\A[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]+\z/i #i for case insensitive
 
     validates :email, presence: true, length: { maximum: 105 }, 
-                        uniqueness: {case_sensitive: false}, format: {with: VALID_EMAIL_REGEX, message: "invalid email format"}
+                        uniqueness: {case_sensitive: false}, format: {with: URI::MailTo::EMAIL_REGEXP, message: "invalid email format"}
 end

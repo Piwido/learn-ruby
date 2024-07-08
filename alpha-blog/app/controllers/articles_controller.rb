@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
     before_action :set_article, only: [:show, :edit, :update, :destroy]
+    before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+
     
 
 
@@ -16,10 +18,13 @@ class ArticlesController < ApplicationController
 
 
     def edit 
+        if @article.user != current_user
+            flash[:alert] = "You can only edit your own articles"
+        end
     end 
     def create
         @article = Article.new(article_params)
-        @article.user = User.last
+        @article.user = current_user
         if @article.save
             flash[:notice] = "Article was created successfully"
             redirect_article
@@ -30,19 +35,27 @@ class ArticlesController < ApplicationController
     end
 
     def update 
-        if @article.update(article_params)
-            flash[:notice] = "Article was updated successfully"
-            redirect_article
+        if @article.user != current_user
+            flash[:alert] = "You can only edit your own articles"
         else 
-            render 'edit', status: :unprocessable_entity
+            if @article.update(article_params)
+                flash[:notice] = "Article was updated successfully"
+                redirect_article
+            else 
+                render 'edit', status: :unprocessable_entity
+            end
         end
-
     end
 
     def destroy
-        @article.destroy
-        flash[:notice] = "Article was successfully deleted"
-        redirect_to articles_path
+        if @article.user != current_user
+            flash[:alert] = "You can only delete your own articles"
+        else 
+            @article.destroy
+            flash[:notice] = "Article was successfully deleted"
+            redirect_to articles_path
+    
+        end
     end
     
 

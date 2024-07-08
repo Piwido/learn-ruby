@@ -1,0 +1,26 @@
+<h1> Users listing page </h1>
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>email</th>    
+      <th>Nombre d'articles'</th>
+        <th>Created at</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+    <tr>
+      <td><%= user.username%></td>
+      <td><%= user.email%></td>
+      <td><%= user.articles.count%></td>
+
+
+      <td><%= user.created_at.strftime("%d %B %Y")%></td>
+
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<p></p>
+<%= link_to 'Créer un article', new_article_path%>

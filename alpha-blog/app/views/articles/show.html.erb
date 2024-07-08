@@ -1,8 +1,19 @@
 <h1>Showing article details</h1>
 
-<p><strong>Title : </strong> <%= @article.title %> </p>
-<p><strong>Description : </strong><%= @article.description %></p></br>
-<td><%= link_to 'Index', articles_path %></td> |
-<td><%= link_to 'Edit', edit_article_path(@article) %></td>
-<%= link_to 'destroy', article_path(@article), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-
+<p><strong>Title : </strong>
+    <%= @article.title %>
+</p>
+<p><strong>Description : </strong>
+    <%= @article.description %>
+</p></br>
+<p>Written by : <td>
+        <%= @article.user.username if @article.user %>
+    </td>, id :<%= @article.user.id if @article.user %>
+</p></br>
+<td>
+    <%= link_to 'Index' , articles_path %>
+</td> |
+<td>
+    <%= link_to 'Edit' , edit_article_path(@article) %>
+</td> |
+<%= link_to 'destroy' , article_path(@article), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
