@@ -12,6 +12,6 @@ class User < ApplicationRecord
 
     validates :email, presence: true, length: { maximum: 105 }, 
                         uniqueness: {case_sensitive: false}, format: {with: URI::MailTo::EMAIL_REGEXP, message: "invalid email format"}
-    enumerize :role, in: [:restricted, :user, :admin], default: :user, predicates: true, shallow: true
+    enumerize :role, in: { restricted: 0, user: 1, admin: 2 }, default: :user, predicates: true
                       
 end

@@ -1,0 +1,26 @@
+<h1 class="text-center">Categories</h1>
+
+<table> 
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Number of articles</th>
+        <th>Created at</th>
+        <th>Updated at</th>
+        <th>See more </th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @categories.each do |category| %>
+    <tr>
+        <td><%= category.name %></td>
+        <td><%= "text" %></td> 
+        <td><%= l category.created_at %></td>
+        <td><%= category.updated_at.strftime("%d/%m/%Y") %></td>
+        <td><%= link_to category.name, category_path(category) %></td>
+    </tr>
+    <% end %>
+    </tbody>
+</table>
+<p></p>
+<%== pagy_nav(@pagy) %>

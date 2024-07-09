@@ -97,3 +97,11 @@ gem 'enumerize'
 
 # Permissions dynamiques
 gem 'pundit' 
+gem "factory_bot", "~> 6.4"
+gem "factory_bot_rails"
+
+
+group :development, :test do
+  gem 'rspec-rails', '~> 4.0'
+end
+
