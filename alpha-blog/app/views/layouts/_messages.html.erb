@@ -1,4 +1,13 @@
 <% flash.each do |name, msg| %>
-   <p><%= msg %></p>
+<% if name.to_s == 'notice' %>
+<div class="alert alert-success" role="alert">
+   <%= msg %>
+   </div>
+  <% elsif name.to_s == 'alert' %>
+  <div class="alert alert-danger" role="alert">
+    <%= msg %>
+  </div>
+  <% end %>
+
   <% end %>
 

@@ -7,13 +7,19 @@
     <%= @article.description %>
 </p></br>
 <p>Written by : <td>
-        <%= @article.user.username if @article.user %>
+        <%= @article.user.username if @article.user%>
     </td>, id :<%= @article.user.id if @article.user %>
 </p></br>
+<p>
+  <strong>Views:</strong>
+  <%= @article.views %>
+</p>
+
 <td>
     <%= link_to 'Index' , articles_path %>
-</td> |
+</td><% if user_signed_in? && @article.user == current_user %>  |
 <td>
     <%= link_to 'Edit' , edit_article_path(@article) %>
 </td> |
 <%= link_to 'destroy' , article_path(@article), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+<% end %>

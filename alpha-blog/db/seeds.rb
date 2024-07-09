@@ -7,3 +7,15 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+if Article.none? 
+    30.times do
+        title = Faker::Lorem.paragraph_by_chars(number: rand(6..100))  # Adjust to generate titles between 6 and 100 characters
+        description = Faker::Lorem.paragraph_by_chars(number: rand(20..200), supplemental: false)  # Generate descriptions between 20 and 200 characters
+        views = rand(1..100000)  # Generate a random number of views
+        # Assuming there is at least one user in your database. Replace `User.first` with a more dynamic selector if needed.
+        user = User.order("RANDOM()").first  # Or `User.find_by(id: 1)` or `User.order("RANDOM()").first` for a random user
+    
+        Article.create(title: title, description: description, user: user, views: views)
+    end
+end 
+  

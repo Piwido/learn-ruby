@@ -88,3 +88,12 @@ gem "devise", "~> 4.9"
 
 # Pagination
 gem 'pagy', '~> 8.6' 
+
+# Création de données de test
+gem 'faker'
+
+# Enum
+gem 'enumerize'
+
+# Permissions dynamiques
+gem 'pundit' 

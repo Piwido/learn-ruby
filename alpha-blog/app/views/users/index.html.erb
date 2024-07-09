@@ -6,6 +6,7 @@
       <th>email</th>    
       <th>Nombre d'articles'</th>
         <th>Created at</th>
+        <th>Role</th>
     </tr>
   </thead>
   <tbody>
@@ -14,9 +15,8 @@
       <td><%= user.username%></td>
       <td><%= user.email%></td>
       <td><%= user.articles.count%></td>
-
-
       <td><%= user.created_at.strftime("%d %B %Y")%></td>
+      <td><%= user.role%></td>
 
     </tr>
     <% end %>

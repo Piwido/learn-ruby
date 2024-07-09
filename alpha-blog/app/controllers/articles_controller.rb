@@ -6,10 +6,12 @@ class ArticlesController < ApplicationController
 
 
     def index
-        @articles = Article.all
+        @pagy, @articles = pagy(Article.all, items: 10)
     end
 
     def show
+        @article.increment!(:views)
+
     end
 
     def new
@@ -18,10 +20,9 @@ class ArticlesController < ApplicationController
 
 
     def edit 
-        if @article.user != current_user
-            flash[:alert] = "You can only edit your own articles"
-        end
+        authorize @article
     end 
+
     def create
         @article = Article.new(article_params)
         @article.user = current_user
@@ -35,20 +36,17 @@ class ArticlesController < ApplicationController
     end
 
     def update 
-        if @article.user != current_user
-            flash[:alert] = "You can only edit your own articles"
+        authorize @article
+        if @article.update(article_params)
+            flash[:notice] = "Article was updated successfully"
+            redirect_article
         else 
-            if @article.update(article_params)
-                flash[:notice] = "Article was updated successfully"
-                redirect_article
-            else 
-                render 'edit', status: :unprocessable_entity
-            end
+            render 'edit', status: :unprocessable_entity
         end
     end
 
     def destroy
-        if @article.user != current_user
+        if @article.user != current_user || !current_user.admin?
             flash[:alert] = "You can only delete your own articles"
         else 
             @article.destroy

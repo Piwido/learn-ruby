@@ -20,11 +20,15 @@
       <td><%= article.title%></td>
       <td><%= article.description%></td>
       <td><%= article.views%></td>
-      <td><%= article.created_at.strftime("%d/%m/%Y")%></td>
+      <td><%= l article.created_at%></td>
       <td><%= article.updated_at.strftime("%d/%m/%Y")%></td>
     <td><%= link_to 'Show', article_path(article) %></td>
+    <% if policy(article).update? %>
     <td><%= link_to 'Edit', edit_article_path(article) %>
+    <% end %>
+    <% if policy(article).destroy? %>
     <td><%= link_to 'destroy', article_path(article), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
+    <% end %>
     <td><%= article.user.username if article.user %></td>
     <td><%= article.user.id if article.user %></td>
 
@@ -33,4 +37,8 @@
   </tbody>
 </table>
 <p></p>
+<% if user_signed_in? %>
 <%= link_to 'Créer un article', new_article_path%>
+<% end %>
+<%# Note the double equals sign "==" which marks the output as trusted and html safe: %>
+<%== pagy_nav(@pagy) %>
