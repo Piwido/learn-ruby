@@ -1,0 +1,14 @@
+<h1>Showing category</h1>
+<p><strong>Name: </strong> <%= @category.name %></p>
+
+<% if user_signed_in? && current_user.admin? %>
+  <%= form_with model: @category, local: true do |form| %>
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+    <div class="actions">
+      <%= form.submit "Update Category" %>
+    </div>
+  <% end %> 
+<% end %> 
