@@ -3,6 +3,8 @@ class CategoriesController < ApplicationController
 
     def new
       @category = Category.new
+      response.status = 200
+
     end
   
     def create
