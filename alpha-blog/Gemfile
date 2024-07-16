@@ -80,5 +80,15 @@ gem 'faker'
 # Dynamic permissions
 gem 'pundit'
 
+# Image uploading
+gem 'shrine', '~> 3.6'
 
-gem "shrine", "~> 3.6"
+# Interface admin
+gem 'activeadmin'
+
+# Plus integrations with:
+gem 'cancancan'
+gem 'draper'
+
+
+gem 'simplecov', require: false, group: :test

@@ -6,7 +6,12 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, only: %i[new create edit update]
 
   def index
-    @pagy, @articles = pagy(Article.all, items: 10)
+    @q = Article.ransack(params[:q])
+    @articles = @q.result.includes(:categories).distinct.page(params[:page])
+
+    # Apply pagination to the filtered results
+    @pagy, @articles = pagy(@articles, items: 10)
+  
   end
 
   def show

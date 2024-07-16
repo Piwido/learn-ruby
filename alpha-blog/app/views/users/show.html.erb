@@ -1,0 +1,18 @@
+
+    <div class="card" style="width: 18rem;">
+        <% if !@user.image_data%>
+        <%= image_tag 'nopic.png', class: 'card-img-top', alt: 'No rofile pic' %>
+        <% else %>
+        <%= image_tag @user.image_url , class: 'card-img-top', alt: 'Profile pic' %>
+
+        <% end%>
+        <div class="card-body">
+            <h5 class="card-title"> Username : <%= @user.username %></h5>
+            <p class="card-text">
+                Email : <%= @user.email %>
+
+            </p>
+            <%= link_to 'Upload picture', upload_pic_path, class:'btn btn-primary'%>
+        </div>
+    </div>
+

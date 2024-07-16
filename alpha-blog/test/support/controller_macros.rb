@@ -5,7 +5,7 @@
 #       sign_in FactoryBot.create(:admin)
 #     end
 #   end
-# 
+#
 #   def login_user(test_case)
 #     test_case.instance_eval do
 #       @request.env["devise.mapping"] = Devise.mappings[:user]
