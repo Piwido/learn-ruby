@@ -15,8 +15,7 @@ ActiveAdmin.register User do
   # end
   # ActiveAdmin.register User do
   permit_params :username, :email, :role, :image_data, :reset_password_token,
-  :reset_password_sent_at, :remember_created_at
+                :reset_password_sent_at, :remember_created_at
 
-# Other configurations for Active Admin go here
-
+  # Other configurations for Active Admin go here
 end

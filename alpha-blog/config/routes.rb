@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   resources :users, only: %i[index show]
   get 'upload_pic', to: 'users#upload_pic_get'
-  post 'upload_pic_post', to: 'users#upload_pic'
+  post 'upload_pic_post', to: 'users#upload_pic_post'
 
   # Defines the root path route ("/")
   # root "posts#index"

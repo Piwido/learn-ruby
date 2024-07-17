@@ -12,7 +12,9 @@
                 Email : <%= @user.email %>
 
             </p>
+            <% if @user == current_user%>
             <%= link_to 'Upload picture', upload_pic_path, class:'btn btn-primary'%>
+            <% end%>
         </div>
     </div>
 

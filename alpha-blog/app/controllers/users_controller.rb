@@ -3,27 +3,38 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+
+    @q = User.ransack(params[:q])
+    result = @q.result(distinct: true)
+    @users = result
   end
 
   def upload_pic_get
     @user = current_user
   end
 
-  def upload_pic
+  def upload_pic_post
     @user = current_user
-    @user.image_data = user_image_params
+
+    unless params[:photo] && params[:photo][:image]
+      flash[:alert] = 'No image provided'
+      redirect_to upload_pic_get_path
+      return
+    end
+
+    @user.photo.attach(params[:photo][:image])
 
     if @user.save
       flash[:notice] = 'Profile picture was successfully uploaded'
-      redirect_to @user
+      redirect_to user_path(@user)
     else
       flash[:alert] = 'Profile picture was not uploaded'
-      redirect_to @user
+      render 'upload_pic_get', status: :unprocessable_entity
     end
   end
 
   def show
-    @user = current_user
+    @user = User.find(params[:id])
   end
 
   def user_image_params

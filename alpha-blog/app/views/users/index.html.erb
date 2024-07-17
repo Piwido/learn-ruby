@@ -2,7 +2,7 @@
 <table>
   <thead>
     <tr>
-      <th>Username</th>
+      <th><%=sort_link(@q, :username)%></th>
       <th>email</th>    
       <th>Nombre d'articles'</th>
         <th>Created at</th>
@@ -12,7 +12,7 @@
   <tbody>
     <% @users.each do |user| %>
     <tr>
-      <td><%= user.username%></td>
+      <td><%= link_to "#{user.username}", user_path(user)%></td>
       <td><%= user.email%></td>
       <td><%= user.articles.count%></td>
       <td><%= user.created_at.strftime("%d %B %Y")%></td>

@@ -1,4 +1,7 @@
+
+<% if @user%>
 <%= form_for @user, url: upload_pic_post_path, method: :post, html: { multipart: true } do |f| %>
   <%= f.file_field :image_data %>
   <%= f.submit "Upload Picture" %>
 <% end %>
+<% end%>

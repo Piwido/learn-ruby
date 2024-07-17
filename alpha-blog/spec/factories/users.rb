@@ -1,7 +1,11 @@
 FactoryBot.define do
   factory :user do
-    username { 'John' }
-    email    { 'john.doe@example.com' }
+    sequence :username do |n|
+      "personne#{n}"
+    end
+    sequence :email do |n|
+      "personne#{n}@example.com"
+    end
     password { '12345uihdeozigd6' }
     role     { 'user' }
 
@@ -37,5 +41,12 @@ FactoryBot.define do
       username { 'Jane' }
       email    { 'Janet.doe22@exa.com' }
     end
+  end
+
+  factory :another_user do
+    username { 'Janet' }
+    email    { 'test.test@test.test' }
+    password { '12345uihdeozigd6' }
+    role     { 'user' }
   end
 end

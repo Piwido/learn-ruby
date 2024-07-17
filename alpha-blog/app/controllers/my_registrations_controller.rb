@@ -2,7 +2,9 @@
 class MyRegistrationsController < Devise::RegistrationsController
   def create
     super
+    return unless @user.persisted?
+
     UserMailer.with(user: @user).welcome_email.deliver_now
-    flash[:notice] = "Email de bienvenue envoyé avec succès à #{@user.email}!"
+    flash[:notice] = "Email de bienvenue désactivé : #{@user.email}!"
   end
 end

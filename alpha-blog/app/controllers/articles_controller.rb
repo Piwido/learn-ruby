@@ -9,9 +9,7 @@ class ArticlesController < ApplicationController
     @q = Article.ransack(params[:q])
     @articles = @q.result.includes(:categories).distinct.page(params[:page])
 
-    # Apply pagination to the filtered results
     @pagy, @articles = pagy(@articles, items: 10)
-  
   end
 
   def show
@@ -22,8 +20,14 @@ class ArticlesController < ApplicationController
     @article = Article.new
   end
 
+  # bypasser la rediction de la police
   def edit
-    authorize @article
+    if authorize @article
+      render 'edit'
+    else
+      flash[:alert] = 'You can only edit your own articles'
+      redirect_articles
+    end
   end
 
   def create
@@ -39,23 +43,22 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    authorize @article
-    if @article.update(article_params)
+    if (authorize @article) && @article.update(article_params)
       flash[:notice] = 'Article was updated successfully'
       redirect_article
     else
-      render 'edit', status: :unprocessable_entity
+      redirect_articles
     end
   end
 
   def destroy
-    if @article.user != current_user || !current_user.admin?
+    if !current_user || (@article.user != current_user && !current_user.admin?)
       flash[:alert] = 'You can only delete your own articles'
+      redirect_articles
     else
       @article.destroy
       flash[:notice] = 'Article was successfully deleted'
-      redirect_to articles_path
-
+      redirect_articles
     end
   end
 

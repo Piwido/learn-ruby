@@ -90,5 +90,11 @@ gem 'activeadmin'
 gem 'cancancan'
 gem 'draper'
 
-
+# Couverture des tests
 gem 'simplecov', require: false, group: :test
+
+# Stripe
+gem 'stripe-rails'
+
+# Formatage et bonnes pratiques
+gem 'rubocop', require: false

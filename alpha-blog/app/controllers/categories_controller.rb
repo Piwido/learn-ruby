@@ -31,7 +31,9 @@ class CategoriesController < ApplicationController
   end
 
   def index
-    @pagy, @categories = pagy(Category.all, items: 10)
+    @q = Category.ransack(params[:q])
+    result = @q.result(distinct: true)
+    @pagy, @categories = pagy(result, items: 10)
   end
 
   def show
